@@ -1,7 +1,10 @@
 package org.example;
 
 import java.util.Scanner;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class UserInterface {
 
     // Scanner for user input
@@ -84,10 +87,32 @@ public class UserInterface {
                 case 3:
                     System.out.println("Side feature coming next...");
                     break;
-
                 case 4:
+
                     System.out.println("\n===== CHECKOUT =====");
+
                     System.out.println(order.getOrderSummary());
+
+                    System.out.println("\n1) Confirm");
+                    System.out.println("0) Cancel");
+
+                    System.out.print("Choose option: ");
+
+                    int checkoutChoice = scanner.nextInt();
+
+                    if (checkoutChoice == 1) {
+
+                        saveReceipt(order);
+
+                        System.out.println("\nOrder confirmed!");
+
+                        ordering = false;
+
+                    } else {
+
+                        System.out.println("\nCheckout cancelled.");
+                    }
+
                     break;
 
                 case 0:
@@ -238,6 +263,81 @@ public class UserInterface {
         order.addDrink(drink);
 
         System.out.println("\nDrink added successfully!");
+    }
+    // Add side to order
+    private void addSide(Order order) {
+
+        System.out.println("\nSelect Side:");
+
+        System.out.println("1) Fries ($2.50)");
+        System.out.println("2) Onion Rings ($3.00)");
+        System.out.println("3) Nuggets ($4.00)");
+
+        System.out.print("Choose side: ");
+
+        int choice = scanner.nextInt();
+
+        Side side;
+
+        switch (choice) {
+
+            case 1:
+                side = new Side("Fries", 2.50);
+                break;
+
+            case 2:
+                side = new Side("Onion Rings", 3.00);
+                break;
+
+            case 3:
+                side = new Side("Nuggets", 4.00);
+                break;
+
+            default:
+                System.out.println("Invalid option.");
+                return;
+        }
+
+        // Add side to order
+        order.addSide(side);
+
+        System.out.println("\nSide added successfully!");
+    }
+
+    // Save receipt to file
+    private void saveReceipt(Order order) {
+
+        try {
+
+            // Create receipts folder
+            File folder = new File("receipts");
+
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+
+            // Create file name with date and time
+            String fileName = LocalDateTime.now()
+                    .format(DateTimeFormatter.ofPattern(
+                            "yyyyMMdd-HHmmss"));
+
+            File receiptFile =
+                    new File(folder, fileName + ".txt");
+
+            // Write receipt
+            FileWriter writer =
+                    new FileWriter(receiptFile);
+
+            writer.write(order.getOrderSummary());
+
+            writer.close();
+
+            System.out.println("\nReceipt saved successfully!");
+
+        } catch (Exception e) {
+
+            System.out.println("Error saving receipt.");
+        }
     }
     // Exit application
     private void exitApp() {
