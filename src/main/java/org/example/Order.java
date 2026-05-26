@@ -1,100 +1,178 @@
 package org.example;
+
 import java.util.ArrayList;
+
 public class Order {
+
+    // =========================
+    // FIELDS
+    // =========================
+
     private ArrayList<Burger> burgers;
+
     private ArrayList<Drink> drinks;
+
     private ArrayList<Side> sides;
 
-    // Constructor
+    // =========================
+    // CONSTRUCTOR
+    // =========================
+
     public Order() {
 
         burgers = new ArrayList<>();
+
         drinks = new ArrayList<>();
+
         sides = new ArrayList<>();
     }
 
-    // Add Burger
+    // =========================
+    // ADD METHODS
+    // =========================
+
     public void addBurger(Burger burger) {
+
         burgers.add(burger);
     }
 
-    // Add Drink
     public void addDrink(Drink drink) {
+
         drinks.add(drink);
     }
 
-    // Add Side
     public void addSide(Side side) {
+
         sides.add(side);
     }
 
-    // Getters
+    // =========================
+    // GETTERS
+    // =========================
+
     public ArrayList<Burger> getBurgers() {
+
         return burgers;
     }
 
     public ArrayList<Drink> getDrinks() {
+
         return drinks;
     }
 
     public ArrayList<Side> getSides() {
+
         return sides;
     }
 
-    //  Calculate Total Price
+    // =========================
+    // CALCULATE TOTAL
+    // =========================
+
     public double calculateTotal() {
 
         double total = 0;
 
         // Burger prices
         for (Burger burger : burgers) {
+
             total += burger.calculatePrice();
         }
 
         // Drink prices
         for (Drink drink : drinks) {
+
             total += drink.getPrice();
         }
 
         // Side prices
         for (Side side : sides) {
+
             total += side.getPrice();
         }
 
         return total;
     }
 
-    //  Order Summary
+    // =========================
+    // ORDER SUMMARY
+    // =========================
+
     public String getOrderSummary() {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("===== THE BURGER LAB =====\n");
+        sb.append("\n==============================\n");
 
-        // Burgers
-        for (Burger burger : burgers) {
-            sb.append("\n");
-            sb.append(burger.getBurgerDetails());
+        sb.append("     THE BURGER LAB 🍔\n");
+
+        sb.append("==============================\n");
+
+        // =========================
+        // BURGERS
+        // =========================
+
+        if (burgers.size() > 0) {
+
+            sb.append("\nBURGERS:\n");
+
+            for (Burger burger : burgers) {
+
+                sb.append("\n");
+
+                sb.append(burger.getBurgerDetails());
+            }
         }
 
-        // Drinks
-        for (Drink drink : drinks) {
-            sb.append("\nDrink: ")
-                    .append(drink.getFlavor())
-                    .append(" ")
-                    .append(drink.getSize())
-                    .append("\n");
+        // =========================
+        // DRINKS
+        // =========================
+
+        if (drinks.size() > 0) {
+
+            sb.append("\nDRINKS:\n");
+
+            for (Drink drink : drinks) {
+
+                sb.append("- ")
+                        .append(drink.getFlavor())
+                        .append(" ")
+                        .append(drink.getSize())
+                        .append(" ($")
+                        .append(drink.getPrice())
+                        .append(")\n");
+            }
         }
 
-        // Sides
-        for (Side side : sides) {
-            sb.append("\nSide: ")
-                    .append(side.getName())
-                    .append("\n");
+        // =========================
+        // SIDES
+        // =========================
+
+        if (sides.size() > 0) {
+
+            sb.append("\nSIDES:\n");
+
+            for (Side side : sides) {
+
+                sb.append("- ")
+                        .append(side.getName())
+                        .append(" ($")
+                        .append(side.getPrice())
+                        .append(")\n");
+            }
         }
 
-        sb.append("\nTOTAL: $")
-                .append(String.format("%.2f", calculateTotal()));
+        // =========================
+        // TOTAL
+        // =========================
+
+        sb.append("\n------------------------------\n");
+
+        sb.append("TOTAL: $")
+                .append(String.format("%.2f",
+                        calculateTotal()));
+
+        sb.append("\n==============================\n");
 
         return sb.toString();
     }

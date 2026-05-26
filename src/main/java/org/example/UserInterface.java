@@ -22,7 +22,7 @@ public class UserInterface {
     public static final String CYAN = "\u001B[36m";
 
     // =========================
-    // EMOJIS (UNICODE)
+    // EMOJIS
     // =========================
 
     public static final String BURGER = "\uD83C\uDF54";
@@ -43,14 +43,12 @@ public class UserInterface {
     // =========================
 
     public UserInterface() {
-
         scanner = new Scanner(System.in);
-
         running = true;
     }
 
     // =========================
-    // START APPLICATION
+    // START
     // =========================
 
     public void start() {
@@ -59,7 +57,7 @@ public class UserInterface {
 
             showHomeScreen();
 
-            int choice = scanner.nextInt();
+            int choice = getIntInput();
 
             switch (choice) {
 
@@ -74,7 +72,7 @@ public class UserInterface {
                 default:
                     System.out.println(RED +
                             "\n" + CROSS +
-                            " Invalid option. Try again."
+                            " Invalid option."
                             + RESET);
             }
         }
@@ -88,32 +86,23 @@ public class UserInterface {
 
         System.out.println(CYAN +
                 "\n====================================");
-        System.out.println("       " + BURGER +
-                " THE BURGER LAB " + BURGER);
+        System.out.println("       " + BURGER + " THE BURGER LAB " + BURGER);
         System.out.println("===================================="
                 + RESET);
 
-        System.out.println(YELLOW +
-                "1) New Order"
-                + RESET);
+        System.out.println(YELLOW + "1) New Order" + RESET);
+        System.out.println(RED + "0) Exit" + RESET);
 
-        System.out.println(RED +
-                "0) Exit"
-                + RESET);
-
-        System.out.print(GREEN +
-                "\nChoose option: "
-                + RESET);
+        System.out.print(GREEN + "\nChoose option: " + RESET);
     }
 
     // =========================
-    // START NEW ORDER
+    // NEW ORDER
     // =========================
 
     private void startNewOrder() {
 
         Order order = new Order();
-
         boolean ordering = true;
 
         while (ordering) {
@@ -122,31 +111,15 @@ public class UserInterface {
                     "\n========== ORDER MENU =========="
                     + RESET);
 
-            System.out.println(YELLOW +
-                    "1) Add Burger " + BURGER
-                    + RESET);
+            System.out.println(YELLOW + "1) Add Burger " + BURGER + RESET);
+            System.out.println(YELLOW + "2) Add Drink " + DRINK + RESET);
+            System.out.println(YELLOW + "3) Add Side " + FRIES + RESET);
+            System.out.println(GREEN + "4) Checkout" + RESET);
+            System.out.println(RED + "0) Cancel Order " + CROSS + RESET);
 
-            System.out.println(YELLOW +
-                    "2) Add Drink " + DRINK
-                    + RESET);
+            System.out.print(CYAN + "\nChoose option: " + RESET);
 
-            System.out.println(YELLOW +
-                    "3) Add Side " + FRIES
-                    + RESET);
-
-            System.out.println(GREEN +
-                    "4) Checkout"
-                    + RESET);
-
-            System.out.println(RED +
-                    "0) Cancel Order " + CROSS
-                    + RESET);
-
-            System.out.print(CYAN +
-                    "\nChoose option: "
-                    + RESET);
-
-            int choice = scanner.nextInt();
+            int choice = getIntInput();
 
             switch (choice) {
 
@@ -168,8 +141,7 @@ public class UserInterface {
                             "\n========== CHECKOUT =========="
                             + RESET);
 
-                    System.out.println(
-                            order.getOrderSummary());
+                    System.out.println(order.getOrderSummary());
 
                     System.out.println(GREEN +
                             "\n1) Confirm " + CHECK
@@ -183,10 +155,43 @@ public class UserInterface {
                             "\nChoose option: "
                             + RESET);
 
-                    int checkoutChoice =
-                            scanner.nextInt();
+                    int checkoutChoice = getIntInput();
 
                     if (checkoutChoice == 1) {
+
+                        // PAYMENT METHOD
+                        System.out.println(YELLOW +
+                                "\nSelect Payment Method:"
+                                + RESET);
+
+                        System.out.println("1) Cash");
+                        System.out.println("2) Card");
+
+                        System.out.print(CYAN +
+                                "Choose option: "
+                                + RESET);
+
+                        int paymentChoice = getIntInput();
+
+                        String paymentMethod = "";
+
+                        switch (paymentChoice) {
+
+                            case 1:
+                                paymentMethod = "Cash";
+                                break;
+
+                            case 2:
+                                paymentMethod = "Card";
+                                break;
+
+                            default:
+                                paymentMethod = "Unknown";
+                        }
+
+                        System.out.println(GREEN +
+                                "\nPayment Method: " + paymentMethod
+                                + RESET);
 
                         saveReceipt(order);
 
@@ -235,208 +240,36 @@ public class UserInterface {
 
         scanner.nextLine();
 
-        // Burger size
-        System.out.println(YELLOW +
-                "\nSelect Burger Size:"
-                + RESET);
+        System.out.println(YELLOW + "\nSelect Burger Size:" + RESET);
+        System.out.println("1) Small (8)");
+        System.out.println("2) Medium (12)");
+        System.out.println("3) Large (16)");
 
-        System.out.println("1) Small");
-        System.out.println("2) Medium");
-        System.out.println("3) Large");
-
-        System.out.print(CYAN +
-                "Choose size: "
-                + RESET);
-
-        int sizeChoice = scanner.nextInt();
-
-        scanner.nextLine();
+        int sizeChoice = getIntInput();
 
         String size = "";
 
         switch (sizeChoice) {
 
-            case 1:
-                size = "8";
-                break;
-
-            case 2:
-                size = "12";
-                break;
-
-            case 3:
-                size = "16";
-                break;
-
-            default:
-                System.out.println(RED +
-                        "\n" + CROSS +
-                        " Invalid size."
-                        + RESET);
-                return;
+            case 1: size = "8"; break;
+            case 2: size = "12"; break;
+            case 3: size = "16"; break;
+            default: return;
         }
-
-        // Bun type
-        System.out.println(YELLOW +
-                "\nSelect Bun Type:"
-                + RESET);
-
-        System.out.println("1) White");
-        System.out.println("2) Wheat");
-        System.out.println("3) Brioche");
-
-        System.out.print(CYAN +
-                "Choose bun type: "
-                + RESET);
-
-        int bunChoice = scanner.nextInt();
 
         scanner.nextLine();
 
-        String bunType = "";
+        System.out.print(CYAN + "Bun type: " + RESET);
+        String bunType = scanner.nextLine();
 
-        switch (bunChoice) {
+        System.out.print(CYAN + "Stuffed? (yes/no): " + RESET);
+        boolean stuffed = scanner.nextLine().equalsIgnoreCase("yes");
 
-            case 1:
-                bunType = "White";
-                break;
+        Burger burger = new Burger(size, bunType, stuffed);
 
-            case 2:
-                bunType = "Wheat";
-                break;
-
-            case 3:
-                bunType = "Brioche";
-                break;
-
-            default:
-                System.out.println(RED +
-                        "\n" + CROSS +
-                        " Invalid bun type."
-                        + RESET);
-                return;
-        }
-
-        // Stuffed option
-        System.out.print(CYAN +
-                "\nStuffed Burger? (yes/no): "
-                + RESET);
-
-        String stuffedInput =
-                scanner.nextLine();
-
-        boolean stuffed =
-                stuffedInput.equalsIgnoreCase("yes");
-
-        // Create burger
-        Burger burger =
-                new Burger(size, bunType, stuffed);
-
-        // Add toppings
-        boolean addingToppings = true;
-
-        while (addingToppings) {
-
-            System.out.println(PURPLE +
-                    "\n====== TOPPINGS ======"
-                    + RESET);
-
-            System.out.println("1) Bacon ($2.00)");
-            System.out.println("2) Cheese ($1.50)");
-            System.out.println("3) Lettuce ($0.50)");
-            System.out.println("4) Tomato ($0.50)");
-            System.out.println("0) Done");
-
-            System.out.print(CYAN +
-                    "\nChoose topping: "
-                    + RESET);
-
-            int toppingChoice =
-                    scanner.nextInt();
-
-            switch (toppingChoice) {
-
-                case 1:
-
-                    burger.addTopping(
-                            new Topping(
-                                    "Bacon",
-                                    "PREMIUM",
-                                    2.00));
-
-                    System.out.println(GREEN +
-                            CHECK +
-                            " Bacon added!"
-                            + RESET);
-
-                    break;
-
-                case 2:
-
-                    burger.addTopping(
-                            new Topping(
-                                    "Cheese",
-                                    "PREMIUM",
-                                    1.50));
-
-                    System.out.println(GREEN +
-                            CHECK +
-                            " Cheese added!"
-                            + RESET);
-
-                    break;
-
-                case 3:
-
-                    burger.addTopping(
-                            new Topping(
-                                    "Lettuce",
-                                    "REGULAR",
-                                    0.50));
-
-                    System.out.println(GREEN +
-                            CHECK +
-                            " Lettuce added!"
-                            + RESET);
-
-                    break;
-
-                case 4:
-
-                    burger.addTopping(
-                            new Topping(
-                                    "Tomato",
-                                    "REGULAR",
-                                    0.50));
-
-                    System.out.println(GREEN +
-                            CHECK +
-                            " Tomato added!"
-                            + RESET);
-
-                    break;
-
-                case 0:
-
-                    addingToppings = false;
-                    break;
-
-                default:
-
-                    System.out.println(RED +
-                            "\n" + CROSS +
-                            " Invalid option."
-                            + RESET);
-            }
-        }
-
-        // Add burger to order
         order.addBurger(burger);
 
-        System.out.println(GREEN +
-                "\n" + CHECK +
-                " Burger added successfully!"
-                + RESET);
+        System.out.println(GREEN + CHECK + " Burger added!" + RESET);
     }
 
     // =========================
@@ -447,65 +280,34 @@ public class UserInterface {
 
         scanner.nextLine();
 
-        System.out.println(YELLOW +
-                "\nSelect Drink Size:"
-                + RESET);
-
+        System.out.println(YELLOW + "\nDrink Size:" + RESET);
         System.out.println("1) Small");
         System.out.println("2) Medium");
         System.out.println("3) Large");
 
-        System.out.print(CYAN +
-                "Choose size: "
-                + RESET);
-
-        int sizeChoice = scanner.nextInt();
-
-        scanner.nextLine();
+        int choice = getIntInput();
 
         String size = "";
         double price = 0;
 
-        switch (sizeChoice) {
+        switch (choice) {
 
-            case 1:
-                size = "Small";
-                price = 2.00;
-                break;
-
-            case 2:
-                size = "Medium";
-                price = 2.50;
-                break;
-
-            case 3:
-                size = "Large";
-                price = 3.00;
-                break;
-
-            default:
-                System.out.println(RED +
-                        "\n" + CROSS +
-                        " Invalid size."
-                        + RESET);
-                return;
+            case 1: size = "Small"; price = 2.00; break;
+            case 2: size = "Medium"; price = 2.50; break;
+            case 3: size = "Large"; price = 3.00; break;
+            default: return;
         }
 
-        System.out.print(CYAN +
-                "Enter drink flavor: "
-                + RESET);
+        scanner.nextLine();
 
+        System.out.print("Flavor: ");
         String flavor = scanner.nextLine();
 
-        Drink drink =
-                new Drink(size, flavor, price);
+        Drink drink = new Drink(size, flavor, price);
 
         order.addDrink(drink);
 
-        System.out.println(GREEN +
-                "\n" + CHECK +
-                " Drink added successfully!"
-                + RESET);
+        System.out.println(GREEN + CHECK + " Drink added!" + RESET);
     }
 
     // =========================
@@ -514,50 +316,26 @@ public class UserInterface {
 
     private void addSide(Order order) {
 
-        System.out.println(YELLOW +
-                "\nSelect Side:"
-                + RESET);
+        System.out.println(YELLOW + "\nSides:" + RESET);
+        System.out.println("1) Fries");
+        System.out.println("2) Onion Rings");
+        System.out.println("3) Nuggets");
 
-        System.out.println("1) Fries ($2.50)");
-        System.out.println("2) Onion Rings ($3.00)");
-        System.out.println("3) Nuggets ($4.00)");
-
-        System.out.print(CYAN +
-                "Choose side: "
-                + RESET);
-
-        int choice = scanner.nextInt();
+        int choice = getIntInput();
 
         Side side;
 
         switch (choice) {
 
-            case 1:
-                side = new Side("Fries", 2.50);
-                break;
-
-            case 2:
-                side = new Side("Onion Rings", 3.00);
-                break;
-
-            case 3:
-                side = new Side("Nuggets", 4.00);
-                break;
-
-            default:
-                System.out.println(RED +
-                        "\n" + CROSS +
-                        " Invalid option."
-                        + RESET);
-                return;
+            case 1: side = new Side("Fries", 2.50); break;
+            case 2: side = new Side("Onion Rings", 3.00); break;
+            case 3: side = new Side("Nuggets", 4.00); break;
+            default: return;
         }
 
         order.addSide(side);
 
-        System.out.println(GREEN +
-                "\n" + CHECK +
-                " Side added successfully!"
-                + RESET);
+        System.out.println(GREEN + CHECK + " Side added!" + RESET);
     }
 
     // =========================
@@ -568,58 +346,46 @@ public class UserInterface {
 
         try {
 
-            File folder =
-                    new File("receipts");
+            File folder = new File("receipts");
+            if (!folder.exists()) folder.mkdir();
 
-            if (!folder.exists()) {
+            String fileName = LocalDateTime.now()
+                    .format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 
-                folder.mkdir();
-            }
+            File file = new File(folder, fileName + ".txt");
 
-            String fileName =
-                    LocalDateTime.now()
-                            .format(
-                                    DateTimeFormatter
-                                            .ofPattern(
-                                                    "yyyyMMdd-HHmmss"));
-
-            File receiptFile =
-                    new File(folder,
-                            fileName + ".txt");
-
-            FileWriter writer =
-                    new FileWriter(receiptFile);
-
-            writer.write(
-                    order.getOrderSummary());
-
+            FileWriter writer = new FileWriter(file);
+            writer.write(order.getOrderSummary());
             writer.close();
 
-            System.out.println(GREEN +
-                    "\n" + CHECK +
-                    " Receipt saved successfully!"
-                    + RESET);
-
         } catch (Exception e) {
-
-            System.out.println(RED +
-                    "\n" + CROSS +
-                    " Error saving receipt."
-                    + RESET);
+            System.out.println("Error saving receipt.");
         }
     }
 
     // =========================
-    // EXIT APPLICATION
+    // INPUT SAFETY
+    // =========================
+
+    private int getIntInput() {
+
+        while (!scanner.hasNextInt()) {
+            System.out.println(RED + "Enter valid number!" + RESET);
+            scanner.next();
+        }
+
+        return scanner.nextInt();
+    }
+
+    // =========================
+    // EXIT
     // =========================
 
     private void exitApp() {
 
         System.out.println(PURPLE +
-                "\nThank you for visiting "
-                + BURGER +
-                " THE BURGER LAB "
-                + BURGER
+                "\nThank you for visiting " +
+                BURGER + " THE BURGER LAB " + BURGER
                 + RESET);
 
         running = false;
