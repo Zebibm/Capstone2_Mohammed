@@ -1,0 +1,20 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: zebib
+
+BURGERS:
+- No burgers
+
+DRINKS:
+- cocke Medium ($2.5)
+
+SIDES:
+- No sides
+
+------------------------------
+TOTAL: $2.50
+==============================

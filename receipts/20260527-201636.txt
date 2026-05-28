@@ -1,0 +1,26 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Customer: Unknown
+
+BURGERS:
+
+Medium Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+
+DRINKS:
+- cocke Large ($3.0)
+
+SIDES:
+- org.example.Side@5e9f23b4
+
+------------------------------
+TOTAL: $17.00
+==============================

@@ -1,0 +1,21 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+12" Burger
+Bun: Brioche
+Stuffed: true
+Toppings:
+- Tomato ($0.5)
+- Lettuce ($0.5)
+Burger Price: $15.00
+
+SIDES:
+- Nuggets ($4.0)
+
+------------------------------
+TOTAL: $19.00
+==============================

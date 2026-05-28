@@ -1,0 +1,24 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+
+Medium Burger
+Bun: Wheat
+Stuffed: No
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+DRINKS:
+- sprite Small ($2.5)
+
+SIDES:
+- Fries ($2.5)
+
+------------------------------
+TOTAL: $14.00
+==============================

@@ -1,0 +1,24 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+BURGERS:
+
+Small Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+DRINKS:
+- No drinks
+
+SIDES:
+- org.example.Side@9807454
+
+------------------------------
+TOTAL: $
+12.00
+==============================

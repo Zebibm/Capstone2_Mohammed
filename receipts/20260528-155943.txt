@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: zeb
+
+BURGERS:
+
+Medium Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+
+DRINKS:
+- coo Large ($3.0)
+
+SIDES:
+- Onion Rings ($3.00)
+
+------------------------------
+TOTAL: $17.00
+==============================

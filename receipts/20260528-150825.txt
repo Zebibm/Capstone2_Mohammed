@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: ZEBII
+
+BURGERS:
+
+Large Burger
+Bun: White
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $13.00
+
+
+DRINKS:
+- cocke Medium ($2.5)
+
+SIDES:
+- Onion Rings ($3.00)
+
+------------------------------
+TOTAL: $18.50
+==============================

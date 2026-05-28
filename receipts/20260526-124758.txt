@@ -1,0 +1,17 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+8" Burger
+Bun: White
+Stuffed: false
+Toppings:
+- No toppings
+Burger Price: $8.50
+
+------------------------------
+TOTAL: $8.50
+==============================

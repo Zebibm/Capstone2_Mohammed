@@ -1,0 +1,24 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+BURGERS:
+
+Medium Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+DRINKS:
+- No drinks
+
+SIDES:
+- No sides
+
+------------------------------
+TOTAL: $
+11.00
+==============================

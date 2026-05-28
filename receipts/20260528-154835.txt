@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: zebib
+
+BURGERS:
+
+Medium Burger
+Bun: Brioche
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+
+DRINKS:
+- cocke Medium ($2.5)
+
+SIDES:
+- Nuggets ($4.00)
+
+------------------------------
+TOTAL: $17.50
+==============================

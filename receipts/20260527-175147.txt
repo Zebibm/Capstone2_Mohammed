@@ -1,0 +1,32 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+BURGERS:
+
+Medium Burger
+Bun: Brioche
+Stuffed: No
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+
+Medium Burger
+Bun: White
+Stuffed: No
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+DRINKS:
+- cocke Small ($2.5)
+
+SIDES:
+- org.example.Side@6f539caf
+
+------------------------------
+TOTAL: $
+23.00
+==============================

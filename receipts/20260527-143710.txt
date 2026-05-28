@@ -1,0 +1,18 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+
+Small Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+------------------------------
+TOTAL: $9.00
+==============================

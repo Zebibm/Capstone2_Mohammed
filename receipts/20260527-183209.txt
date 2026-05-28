@@ -1,0 +1,24 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+BURGERS:
+
+Small Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+DRINKS:
+- cocke Small ($2.5)
+
+SIDES:
+- No sides
+
+------------------------------
+TOTAL: $
+11.50
+==============================

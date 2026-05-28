@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: Sai
+
+BURGERS:
+
+Medium Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+
+DRINKS:
+- No drinks
+
+SIDES:
+- Onion Rings ($3.00)
+
+------------------------------
+TOTAL: $14.00
+==============================

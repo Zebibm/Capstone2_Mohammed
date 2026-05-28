@@ -1,0 +1,17 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+Medium Burger
+Bun: Brioche
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $9.00
+
+------------------------------
+TOTAL: $9.00
+==============================

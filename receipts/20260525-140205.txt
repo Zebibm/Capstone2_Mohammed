@@ -1,0 +1,11 @@
+===== THE BURGER LAB =====
+
+12" Burger
+Bun: Wheat
+Stuffed: false
+Toppings:
+- Cheese ($1.5)
+- Tomato ($0.5)
+Burger Price: $14.00
+
+TOTAL: $14.00

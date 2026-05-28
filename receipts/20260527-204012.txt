@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: zebib
+
+BURGERS:
+
+Large Burger
+Bun: Wheat
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $13.00
+
+
+DRINKS:
+- No drinks
+
+SIDES:
+- No sides
+
+------------------------------
+TOTAL: $13.00
+==============================

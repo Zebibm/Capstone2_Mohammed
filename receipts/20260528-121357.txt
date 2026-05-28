@@ -1,0 +1,20 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 3
+Customer: zeb
+
+BURGERS:
+- No burgers
+
+DRINKS:
+- No drinks
+
+SIDES:
+- No sides
+
+------------------------------
+TOTAL: $0.00
+==============================

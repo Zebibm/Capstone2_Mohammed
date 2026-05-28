@@ -1,0 +1,23 @@
+
+==============================
+     THE BURGER LAB 🍔
+==============================
+
+BURGERS:
+
+12" Burger
+Bun: Brioche
+Stuffed: false
+Toppings:
+- No toppings
+Burger Price: $12.00
+
+DRINKS:
+- strawberry Medium ($2.5)
+
+SIDES:
+- Onion Rings ($3.0)
+
+------------------------------
+TOTAL: $17.50
+==============================

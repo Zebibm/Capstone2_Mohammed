@@ -1,0 +1,27 @@
+
+==============================
+     THE BURGER LAB
+==============================
+
+Order ID: 1
+Customer: see
+
+BURGERS:
+
+Medium Burger
+Bun: Brioche
+Stuffed: Yes
+Toppings:
+- No toppings
+Burger Price: $11.00
+
+
+DRINKS:
+- No drinks
+
+SIDES:
+- Nuggets ($4.00)
+
+------------------------------
+TOTAL: $15.00
+==============================
