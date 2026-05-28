@@ -9,9 +9,7 @@ public class Order {
     // =========================
 
     private ArrayList<Burger> burgers;
-
     private ArrayList<Drink> drinks;
-
     private ArrayList<Side> sides;
 
     // =========================
@@ -21,14 +19,12 @@ public class Order {
     public Order() {
 
         burgers = new ArrayList<>();
-
         drinks = new ArrayList<>();
-
         sides = new ArrayList<>();
     }
 
     // =========================
-    // ADD METHODS
+    // ADD ITEMS
     // =========================
 
     public void addBurger(Burger burger) {
@@ -51,17 +47,14 @@ public class Order {
     // =========================
 
     public ArrayList<Burger> getBurgers() {
-
         return burgers;
     }
 
     public ArrayList<Drink> getDrinks() {
-
         return drinks;
     }
 
     public ArrayList<Side> getSides() {
-
         return sides;
     }
 
@@ -102,25 +95,30 @@ public class Order {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("\n==============================\n");
-
-        sb.append("     THE BURGER LAB 🍔\n");
-
-        sb.append("==============================\n");
+        sb.append("""
+                
+                ==============================
+                     THE BURGER LAB 
+                ==============================
+                
+                """);
 
         // =========================
         // BURGERS
         // =========================
 
-        if (burgers.size() > 0) {
+        sb.append("BURGERS:\n");
 
-            sb.append("\nBURGERS:\n");
+        if (burgers.isEmpty()) {
+
+            sb.append("- No burgers\n");
+
+        } else {
 
             for (Burger burger : burgers) {
 
-                sb.append("\n");
-
-                sb.append(burger.getBurgerDetails());
+                sb.append(burger.getBurgerDetails())
+                        .append("\n");
             }
         }
 
@@ -128,19 +126,19 @@ public class Order {
         // DRINKS
         // =========================
 
-        if (drinks.size() > 0) {
+        sb.append("DRINKS:\n");
 
-            sb.append("\nDRINKS:\n");
+        if (drinks.isEmpty()) {
+
+            sb.append("- No drinks\n");
+
+        } else {
 
             for (Drink drink : drinks) {
 
                 sb.append("- ")
-                        .append(drink.getFlavor())
-                        .append(" ")
-                        .append(drink.getSize())
-                        .append(" ($")
-                        .append(drink.getPrice())
-                        .append(")\n");
+                        .append(drink.toString())
+                        .append("\n");
             }
         }
 
@@ -148,31 +146,37 @@ public class Order {
         // SIDES
         // =========================
 
-        if (sides.size() > 0) {
+        sb.append("\nSIDES:\n");
 
-            sb.append("\nSIDES:\n");
+        if (sides.isEmpty()) {
+
+            sb.append("- No sides\n");
+
+        } else {
 
             for (Side side : sides) {
 
                 sb.append("- ")
-                        .append(side.getName())
-                        .append(" ($")
-                        .append(side.getPrice())
-                        .append(")\n");
+                        .append(side.toString())
+                        .append("\n");
             }
         }
 
-        // =========================
-        // TOTAL
-        // =========================
+          // =========================
+          // TOTAL
+         // =========================
 
-        sb.append("\n------------------------------\n");
+        sb.append("""
+        
+        ------------------------------
+        TOTAL: $""");
 
-        sb.append("TOTAL: $")
-                .append(String.format("%.2f",
-                        calculateTotal()));
+        sb.append(String.format("%.2f", calculateTotal()));
 
-        sb.append("\n==============================\n");
+        sb.append("""
+        
+        ==============================
+        """);
 
         return sb.toString();
     }
