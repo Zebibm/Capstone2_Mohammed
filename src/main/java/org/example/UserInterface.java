@@ -501,9 +501,9 @@ public class UserInterface {
                         RESET);
     }
 
-    // =========================
+    // ========================
     // INPUT SAFE
-    // =========================
+    // ========================
     private int getIntInput() {
 
         // checks valid integer
