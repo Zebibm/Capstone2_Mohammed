@@ -44,12 +44,12 @@ public class FileManager {
                 writer.close();
 
                 System.out.println(
-                        "\n✅ Receipt saved successfully!");
+                        "\n Receipt saved successfully!");
 
             } catch (Exception e) {
 
                 System.out.println(
-                        "\n❌ Error saving receipt.");
+                        "\n Error saving receipt.");
             }
         }
     }
