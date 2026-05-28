@@ -1,17 +1,30 @@
 package org.example;
 
-public class Drink {private String size;
+public class Drink {
+
+    // =========================
+    // FIELDS
+    // =========================
+
+    private String size;
     private String flavor;
     private double price;
 
-    // Constructor
+    // =========================
+    // CONSTRUCTOR
+    // =========================
+
     public Drink(String size, String flavor, double price) {
+
         this.size = size;
         this.flavor = flavor;
         this.price = price;
     }
 
-    // Getters
+    // =========================
+    // GETTERS
+    // =========================
+
     public String getSize() {
         return size;
     }
@@ -24,11 +37,15 @@ public class Drink {private String size;
         return price;
     }
 
-    // Drink details
-    public String getDrinkDetails() {
+    // =========================
+    // DRINK DETAILS
+    // =========================
 
-        return size + " " + flavor + " - $" +
-                String.format("%.2f", price);
+    @Override
+    public String toString() {
+
+        return flavor + " " + size + " ($" + price + ")";
     }
-
 }
+
+

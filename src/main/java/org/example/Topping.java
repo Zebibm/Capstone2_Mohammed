@@ -1,18 +1,30 @@
 package org.example;
 
 public class Topping {
+
+    // =========================
+    // FIELDS
+    // =========================
+
     private String name;
-    private String type;   // REGULAR or PREMIUM
+    private String type;
     private double price;
 
-    // Constructor
+    // =========================
+    // CONSTRUCTOR
+    // =========================
+
     public Topping(String name, String type, double price) {
+
         this.name = name;
         this.type = type;
         this.price = price;
     }
 
-    // Getters
+    // =========================
+    // GETTERS
+    // =========================
+
     public String getName() {
         return name;
     }
@@ -25,9 +37,13 @@ public class Topping {
         return price;
     }
 
-    //  display info
-    public String getToppingInfo() {
-        return name + " (" + type + ") - $" + price;
+    // =========================
+    // TOPPING DETAILS
+    // =========================
+
+    @Override
+    public String toString() {
+
+        return name + " ($" + price + ")";
     }
 }
-
