@@ -1,6 +1,8 @@
 package org.example;
 
-public class Side { private String name;
+public class Side {
+
+    private String name;
     private double price;
 
     // Constructor
@@ -20,9 +22,13 @@ public class Side { private String name;
 
     // Side details
     public String getSideDetails() {
-
         return name + " - $" +
                 String.format("%.2f", price);
     }
-}
 
+
+    @Override
+    public String toString() {
+        return name + " ($" + String.format("%.2f", price) + ")";
+    }
+}
