@@ -12,7 +12,6 @@ public class UserInterface {
     // COLORS
     // =========================
     public static final String RESET = "\u001B[0m";
-
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";
@@ -27,43 +26,50 @@ public class UserInterface {
     // =========================
     // FIELDS
     // =========================
-    private Scanner scanner;
-    private boolean running;
+    private Scanner scanner = new Scanner(System.in);
 
-    public UserInterface() {
-        scanner = new Scanner(System.in);
-        running = true;
-    }
+    // controls app loop
+    private boolean running = true;
 
     // =========================
-    // START
+    // START APPLICATION
     // =========================
     public void start() {
 
-        System.out.println(CYAN + "\n====================================" + RESET);
-        System.out.println(YELLOW + "      Welcome to THE BURGER LAB!" + RESET);
+        // app title
+        System.out.println(CYAN + "====================================" + RESET);
+        System.out.println(YELLOW + "   Welcome to THE BURGER LAB!" + RESET);
         System.out.println(CYAN + "====================================" + RESET);
 
         while (running) {
+
             showHomeScreen();
+
             int choice = getIntInput();
 
             switch (choice) {
+
                 case 1 -> startNewOrder();
+
                 case 0 -> exitApp();
-                default -> System.out.println(RED + CROSS + " Invalid option" + RESET);
+
+                default ->
+                        System.out.println(
+                                RED + CROSS + " Invalid option" + RESET);
             }
         }
     }
 
     // =========================
-    // HOME
+    // HOME SCREEN
     // =========================
     private void showHomeScreen() {
 
-        System.out.println(PURPLE + "\n           BURGER LAB" + RESET);
+        // main menu
+        System.out.println(PURPLE + "\n BURGER LAB" + RESET);
 
         System.out.println(GREEN + "1) New Order" + RESET);
+
         System.out.println(GREEN + "0) Exit" + RESET);
 
         System.out.print(CYAN + "Choose option: " + RESET);
@@ -74,13 +80,17 @@ public class UserInterface {
     // =========================
     private void startNewOrder() {
 
+        // loading animation
         loadingScreen("Creating new order");
 
         Order order = new Order();
 
-        //  CUSTOMER NAME
+        // clear scanner buffer
+        scanner.nextLine();
+
+        // get customer name
         System.out.print(CYAN + "Enter customer name: " + RESET);
-        scanner.nextLine(); // clear buffer
+
         String name = scanner.nextLine();
 
         if (!name.isBlank()) {
@@ -91,28 +101,69 @@ public class UserInterface {
 
         while (ordering) {
 
-            System.out.println(YELLOW + "\n====== ORDER MENU ======" + RESET);
-            System.out.println("1) Add Burger");
-            System.out.println("2) Add Drink");
-            System.out.println("3) Add Side");
-            System.out.println("4) Checkout");
-            System.out.println("0) Cancel");
+            // order menu
+            System.out.println(
+                    YELLOW + "\n====== ORDER MENU ======" + RESET);
+
+            System.out.println(GREEN + "1) Add Burger" + RESET);
+
+            System.out.println(GREEN + "2) Add Drink" + RESET);
+
+            System.out.println(GREEN + "3) Add Side" + RESET);
+
+            System.out.println(GREEN + "4) Checkout" + RESET);
+
+            System.out.println(GREEN + "0) Cancel" + RESET);
 
             System.out.print(CYAN + "Choose: " + RESET);
 
             int choice = getIntInput();
 
             switch (choice) {
+
                 case 1 -> addBurger(order);
+
                 case 2 -> addDrink(order);
+
                 case 3 -> addSide(order);
+
                 case 4 -> {
-                    if (checkout(order)) ordering = false;
+
+                    // prevents empty orders
+                    if (order.calculateTotal() == 0) {
+
+                        System.out.println(
+                                RED +
+                                        "You cannot checkout empty order!" +
+                                        RESET);
+
+                        break;
+                    }
+
+                    // checkout order
+                    if (checkout(order)) {
+
+                        ordering = false;
+                    }
                 }
+
                 case 0 -> {
-                    System.out.println(RED + CROSS + " Cancelled" + RESET);
+
+                    System.out.println(
+                            RED +
+                                    CROSS +
+                                    " Cancelled" +
+                                    RESET);
+
                     ordering = false;
                 }
+
+                default ->
+                        System.out.println(
+                                RED +
+                                        CROSS +
+                                        " Invalid option" +
+                                        RESET);
             }
         }
     }
@@ -122,170 +173,425 @@ public class UserInterface {
     // =========================
     private boolean checkout(Order order) {
 
-        System.out.println(PURPLE + "\n===== CHECKOUT =====" + RESET);
+        // show order summary
+        System.out.println(
+                PURPLE + "\n===== CHECKOUT =====" + RESET);
 
         System.out.println(order.getOrderSummary());
 
         System.out.println(GREEN + "1) Confirm" + RESET);
+
         System.out.println(RED + "0) Cancel" + RESET);
 
         System.out.print(CYAN + "Choose: " + RESET);
 
+        // cancel checkout
         if (getIntInput() != 1) {
-            System.out.println(RED + CROSS + " Cancelled" + RESET);
+
+            System.out.println(
+                    RED +
+                            CROSS +
+                            " Cancelled" +
+                            RESET);
+
             return false;
         }
 
-        System.out.println(YELLOW + "\nPayment Method:" + RESET);
+        // =========================
+        // PAYMENT METHOD
+        // =========================
+
+        System.out.println(
+                YELLOW + "\nPayment Method:" + RESET);
+
         System.out.println("1) Cash");
+
         System.out.println("2) Card");
 
         int pay = getIntInput();
 
-        String method = (pay == 1) ? "Cash" : "Card";
+        // payment validation
+        while (pay != 1 && pay != 2) {
 
-        System.out.println(BLUE + "Payment: " + method + RESET);
+            System.out.println(
+                    RED +
+                            "Choose 1 or 2 only!" +
+                            RESET);
+
+            pay = getIntInput();
+        }
+
+        String method = (pay == 1)
+                ? "Cash"
+                : "Card";
+
+        System.out.println(
+                BLUE +
+                        "Payment: " +
+                        method +
+                        RESET);
+
+        // =========================
+        // CASH PAYMENT
+        // =========================
 
         if (pay == 1) {
 
-            double total = order.calculateTotal();
+            double total =
+                    order.calculateTotal();
 
-            System.out.println(YELLOW + "Total: $" + total + RESET);
+            System.out.println(
+                    YELLOW +
+                            "Total: $" +
+                            String.format("%.2f", total) +
+                            RESET);
 
-            System.out.print(CYAN + "Enter cash: $" + RESET);
+            System.out.print(
+                    CYAN +
+                            "Enter cash: $" +
+                            RESET);
 
-            double cash = scanner.nextDouble();
+            double cash =
+                    scanner.nextDouble();
 
+            // checks enough money
             while (cash < total) {
-                System.out.print(RED + "Not enough. Try again: $" + RESET);
-                cash = scanner.nextDouble();
+
+                System.out.print(
+                        RED +
+                                "Not enough. Try again: $" +
+                                RESET);
+
+                cash =
+                        scanner.nextDouble();
             }
 
-            double change = cash - total;
-            System.out.println(GREEN + "Change: $" + String.format("%.2f", change) + RESET);
+            // calculate change
+            double change =
+                    cash - total;
+
+            System.out.println(
+                    GREEN +
+                            "Change: $" +
+                            String.format("%.2f", change) +
+                            RESET);
         }
 
+        // loading
         loadingScreen("Processing payment");
 
-        System.out.println(WHITE + "\n========== RECEIPT ==========" + RESET);
+        // print receipt
+        System.out.println(
+                WHITE +
+                        "\n========== RECEIPT ==========" +
+                        RESET);
+
         System.out.println(order.getOrderSummary());
 
+        // save receipt file
         saveReceipt(order);
 
-        System.out.println(GREEN + CHECK + " Order confirmed!" + RESET);
+        System.out.println(
+                GREEN +
+                        CHECK +
+                        " Order confirmed!" +
+                        RESET);
 
         return true;
     }
 
     // =========================
-    // BURGER
+    // ADD BURGER
     // =========================
     private void addBurger(Order order) {
 
-        System.out.println("Select Burger Size:");
-        System.out.println("1) Small  2) Medium  3) Large");
+        int s;
 
-        int size = getIntInput();
+        // size validation
+        do {
 
-        System.out.println("Select Bun:");
-        System.out.println("1) White  2) Wheat  3) Brioche");
+            System.out.println("Select Burger Size:");
+            System.out.println("1) Small");
+            System.out.println("2) Medium");
+            System.out.println("3) Large");
 
-        int bun = getIntInput();
+            s = getIntInput();
 
-        System.out.println("Stuffed? 1=Yes 2=No");
-        boolean stuffed = getIntInput() == 1;
+            if (s < 1 || s > 3) {
 
-        order.addBurger(new Burger(
-                size == 1 ? "Small" : size == 2 ? "Medium" : "Large",
-                bun == 1 ? "White" : bun == 2 ? "Wheat" : "Brioche",
-                stuffed
-        ));
+                System.out.println(
+                        RED +
+                                "Choose 1-3 only!" +
+                                RESET);
+            }
 
-        System.out.println(GREEN + CHECK + " Burger added!" + RESET);
+        } while (s < 1 || s > 3);
+
+        // burger size
+        String size = switch (s) {
+
+            case 1 -> "Small";
+
+            case 2 -> "Medium";
+
+            default -> "Large";
+        };
+
+        int b;
+
+        // bun validation
+        do {
+
+            System.out.println("Bun Type:");
+            System.out.println("1) White");
+            System.out.println("2) Wheat");
+            System.out.println("3) Brioche");
+
+            b = getIntInput();
+
+            if (b < 1 || b > 3) {
+
+                System.out.println(
+                        RED +
+                                "Choose 1-3 only!" +
+                                RESET);
+            }
+
+        } while (b < 1 || b > 3);
+
+        // bun type
+        String bun = switch (b) {
+
+            case 1 -> "White";
+
+            case 2 -> "Wheat";
+
+            default -> "Brioche";
+        };
+
+        // stuffed option
+        System.out.println("Stuffed? 1 Yes 2 No");
+
+        boolean stuffed =
+                getIntInput() == 1;
+
+        // create burger object
+        Burger burger =
+                new Burger(size, bun, stuffed);
+
+        order.addBurger(burger);
+
+        System.out.println(
+                GREEN +
+                        CHECK +
+                        " Burger added!" +
+                        RESET);
     }
 
     // =========================
-    // DRINK
+    // ADD DRINK
     // =========================
     private void addDrink(Order order) {
 
-        System.out.println("Drink size 1/2/3:");
-        int c = getIntInput();
+        int c;
 
+        // drink size validation
+        do {
+
+            System.out.println("Select Drink Size:");
+            System.out.println("1) Small");
+            System.out.println("2) Medium");
+            System.out.println("3) Large");
+
+            c = getIntInput();
+
+            if (c < 1 || c > 3) {
+
+                System.out.println(
+                        RED +
+                                "Choose 1-3 only!" +
+                                RESET);
+            }
+
+        } while (c < 1 || c > 3);
+
+        // drink size
+        String size = switch (c) {
+
+            case 1 -> "Small";
+
+            case 2 -> "Medium";
+
+            default -> "Large";
+        };
+
+        // clear scanner
         scanner.nextLine();
+
+        // drink flavor
         System.out.print("Flavor: ");
+
         String flavor = scanner.nextLine();
 
-        order.addDrink(new Drink(
-                c == 1 ? "Small" : c == 2 ? "Medium" : "Large",
-                flavor,
-                c == 1 ? 2.0 : c == 2 ? 2.5 : 3.0
-        ));
+        // drink price
+        double price = switch (c) {
 
-        System.out.println(GREEN + CHECK + " Drink added!" + RESET);
+            case 1 -> 2.0;
+
+            case 2 -> 2.5;
+
+            default -> 3.0;
+        };
+
+        // create drink object
+        Drink drink =
+                new Drink(size, flavor, price);
+
+        order.addDrink(drink);
+
+        System.out.println(
+                GREEN +
+                        CHECK +
+                        " Drink added!" +
+                        RESET);
     }
 
     // =========================
-    // SIDE
+    // ADD SIDE
     // =========================
     private void addSide(Order order) {
 
-        System.out.println("1 Fries 2 Onion Rings 3 Nuggets");
+        int c;
 
-        int c = getIntInput();
+        // side validation
+        do {
 
-        if (c == 1) order.addSide(new Side("Fries", 2.5));
-        if (c == 2) order.addSide(new Side("Onion Rings", 3.0));
-        if (c == 3) order.addSide(new Side("Nuggets", 4.0));
+            System.out.println("1) Fries");
+            System.out.println("2) Onion Rings");
+            System.out.println("3) Nuggets");
 
-        System.out.println(GREEN + CHECK + " Side added!" + RESET);
+            c = getIntInput();
+
+            if (c < 1 || c > 3) {
+
+                System.out.println(
+                        RED +
+                                "Choose 1-3 only!" +
+                                RESET);
+            }
+
+        } while (c < 1 || c > 3);
+
+        // create side object
+        Side side = switch (c) {
+
+            case 1 -> new Side("Fries", 2.5);
+
+            case 2 -> new Side("Onion Rings", 3.0);
+
+            default -> new Side("Nuggets", 4.0);
+        };
+
+        order.addSide(side);
+
+        System.out.println(
+                GREEN +
+                        CHECK +
+                        " Side added!" +
+                        RESET);
     }
 
     // =========================
     // INPUT SAFE
     // =========================
     private int getIntInput() {
+
+        // checks valid integer
         while (!scanner.hasNextInt()) {
-            System.out.print(RED + "Enter number: " + RESET);
+
+            System.out.print(
+                    RED +
+                            "Enter number: " +
+                            RESET);
+
             scanner.next();
         }
+
         return scanner.nextInt();
     }
 
     // =========================
-    // RECEIPT
+    // SAVE RECEIPT
     // =========================
     private void saveReceipt(Order order) {
 
         try {
-            File f = new File("receipts");
-            if (!f.exists()) f.mkdir();
 
-            String name = LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            // create folder
+            File folder =
+                    new File("receipts");
 
-            FileWriter w = new FileWriter(new File(f, name + ".txt"));
-            w.write(order.getOrderSummary());
-            w.close();
+            if (!folder.exists()) {
+
+                folder.mkdir();
+            }
+
+            // receipt file name
+            String fileName =
+                    LocalDateTime.now()
+                            .format(
+                                    DateTimeFormatter.ofPattern(
+                                            "yyyyMMdd-HHmmss"));
+
+            // save receipt
+            FileWriter writer =
+                    new FileWriter(
+                            new File(folder,
+                                    fileName + ".txt"));
+
+            writer.write(order.getOrderSummary());
+
+            writer.close();
 
         } catch (Exception e) {
+
             System.out.println("Error saving receipt");
         }
     }
 
+    // =========================
+    // LOADING
+    // =========================
     private void loadingScreen(String msg) {
+
         System.out.print(msg);
+
+        // loading dots
         for (int i = 0; i < 4; i++) {
+
             try {
+
                 System.out.print(".");
+
                 Thread.sleep(300);
-            } catch (Exception ignored) {}
+
+            } catch (Exception ignored) {
+            }
         }
+
         System.out.println();
     }
 
+    // =========================
+    // EXIT
+    // =========================
     private void exitApp() {
-        System.out.println(PURPLE + "Thanks for visiting THE BURGER LAB!" + RESET);
+
+        System.out.println(
+                PURPLE +
+                        "Thanks for visiting THE BURGER LAB!" +
+                        RESET);
+
         running = false;
     }
 }
