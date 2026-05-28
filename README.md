@@ -46,7 +46,7 @@ org.example
 └── receipts/   (auto-generated folder)
  How to Run
 1. Clone the project
-git clone https://github.com/your-username/burger-lab.git
+git clone https://github.com/Zebibm/Capstone2_Mohammed
 2. Open in IntelliJ / Eclipse / VS Code
 3. Run Main.java
  Example Output
