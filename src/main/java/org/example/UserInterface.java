@@ -173,7 +173,7 @@ public class UserInterface {
     // =========================
     private boolean checkout(Order order) {
 
-        // show order summary
+        //  order summary
         System.out.println(
                 PURPLE + "\n===== CHECKOUT =====" + RESET);
 
